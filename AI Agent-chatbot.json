@@ -1,0 +1,113 @@
+{
+  "name": "AI Agent-chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f93950fb-d54b-42aa-b294-c938ae9bbb67",
+      "name": "When chat message received",
+      "webhookId": "d0f0a780-e75d-440a-aaf3-23a6646a1d38"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c4fc73ef-9935-4e7b-8f6e-62265320670a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "15554493-01c5-4485-bc20-dbf847a0fba1",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "50c17a74-27f8-413d-b37e-ac0d46b39494",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "N9dL46qtTPGOIjpt",
+          "name": "Groq account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9fed5a9b-09b1-4407-974f-30512dc92583",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7118959e1ad18fc85a3dafbee478e12e6dd7dc52dc2b23d0535b7764f79c7994"
+  },
+  "id": "ifc8oQmurjCOYQjk",
+  "tags": []
+}
